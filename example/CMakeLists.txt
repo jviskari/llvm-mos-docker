@@ -15,3 +15,10 @@ endfunction()
 
 add_executable(foo.prg foo.c)
 create_prg(foo.prg)
+
+add_custom_command(
+  TARGET foo.prg POST_BUILD
+  COMMAND llvm-objdump -S foo.prg.elf > foo.lst
+  BYPRODUCTS foo.lst
+  VERBATIM
+  )
